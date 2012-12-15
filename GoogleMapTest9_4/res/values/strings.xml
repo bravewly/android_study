@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">GoogleMapTest9_4</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="longitude">经度：</string>
+    <string name="latitude">纬度：</string>
+    <string name="hintlongitude">0.0</string>
+    <string name="hintlatitude">0.0</string>
+    <string name="buttonLocation">获取位置</string>
+    <string name="title_activity_map_activity_demo">MapActivityDemo</string>
+
+</resources>

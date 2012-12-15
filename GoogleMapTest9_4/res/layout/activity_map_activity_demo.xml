@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#6699CC"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:paddingBottom="1dip"
+        android:paddingTop="3dip" >
+
+        <TextView
+            android:id="@+id/textViewLongitude"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="3dip"
+            android:layout_marginTop="8dip"
+            android:text="@string/longitude"
+            android:textSize="20dip" />
+
+        <EditText
+            android:id="@+id/editTextLongitude"
+            android:layout_width="80dip"
+            android:layout_height="fill_parent"
+            android:background="#FFFFCC"
+            android:hint="@string/hintlongitude"
+            android:paddingLeft="2dip"
+            android:singleLine="true"
+            android:inputType="numberDecimal"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="3dip"
+            android:layout_marginTop="8dip"
+            android:text="@string/latitude"
+            android:textSize="20dip" />
+
+        <EditText
+            android:id="@+id/editTextLatitude"
+            android:layout_width="80dip"
+            android:layout_height="fill_parent"
+            android:background="#FFFFCC"
+            android:hint="@string/hintlatitude"
+            android:inputType="number"
+            android:paddingLeft="2dip"
+            android:singleLine="true"
+            android:textSize="20dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/buttonLocation" />
+    </LinearLayout>
+
+    <com.google.android.maps.MapView
+        android:id="@+id/myMapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:apiKey="0rUE7IAm92Vcxv41cgQxIC0JoLUR8pWiGvbF3rQ"
+        android:clickable="true" />
+
+</LinearLayout>
