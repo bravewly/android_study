@@ -180,8 +180,12 @@ public class MapActivityDemo extends MapActivity {
 					+ "欢迎您的使用。\n" + "地理坐标为：\n" + "经度:" + stringLongitude + "\n"
 					+ "纬度:" + stringLatitude, mapView);
 			balloonOverlay.showWindow = true;
-			overlays.add(balloonOverlay);
-
+//			overlays.remove(overlays.size() - 1);
+			if (overlays.size() > 0 && overlays.get(overlays.size() - 1) instanceof BalloonOverlay) {
+				overlays.set(overlays.size() - 1, balloonOverlay);
+			} else {
+				overlays.add(balloonOverlay);
+			}
 		} else {
 			result = "Sorry! The GPS does not work. Please check your setting";
 			Toast.makeText(MapActivityDemo.this, result, Toast.LENGTH_SHORT)
