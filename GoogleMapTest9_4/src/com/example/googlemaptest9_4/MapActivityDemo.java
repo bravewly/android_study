@@ -134,7 +134,7 @@ public class MapActivityDemo extends MapActivity {
 				// TODO Auto-generated method stub
 				// 当位置变化时触发
 
-				// updateWhenNewLocaion(location);
+				 updateWhenNewLocaion(location);
 			}
 		};
 
@@ -158,8 +158,10 @@ public class MapActivityDemo extends MapActivity {
 		String result;
 		if (location != null) {
 			String stringLatitude, stringLongitude;
-			int intLongitude = (int) location.getLongitude();
-			int intLatitude = (int) location.getLatitude();
+//			int intLongitude = (int) location.getLongitude();
+//			int intLatitude = (int) location.getLatitude();
+			double intLongitude = location.getLongitude();
+			double intLatitude = location.getLatitude();
 			Log.d(TAG, "location.getLatitude() --> " + location.getLatitude());
 			Log.d(TAG, "location.getLongitude() --> " + location.getLongitude());
 
