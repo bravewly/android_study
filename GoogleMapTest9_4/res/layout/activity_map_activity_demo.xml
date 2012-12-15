@@ -46,7 +46,7 @@
             android:layout_height="fill_parent"
             android:background="#FFFFCC"
             android:hint="@string/hintlatitude"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:paddingLeft="2dip"
             android:singleLine="true"
             android:textSize="20dip" />
