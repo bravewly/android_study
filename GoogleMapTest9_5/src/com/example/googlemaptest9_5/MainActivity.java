@@ -34,7 +34,7 @@ public class MainActivity extends MapActivity {
 	private final int MODE_DIALOG = 1;
 	private int initLatitude = 45;
 	private int initLongitude = 116;
-	MapController mapController;
+	static MapController mapController;
 	static MapView mapView;
 	static Bitmap bitmap;
 	static Handler handler;
@@ -98,7 +98,7 @@ public class MainActivity extends MapActivity {
 				// TODO Auto-generated method stub
 
 				progressBar.setVisibility(View.VISIBLE);
-				threadProgressBar = new ProgressThread();
+				threadProgressBar = new ProgressThread(mapView);
 				threadOutTime = new OutTimeThread();
 				geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
 				if (!threadProgressBar.isAlive()) {
@@ -142,7 +142,7 @@ public class MainActivity extends MapActivity {
 		imageButtonHistory = (ImageButton) findViewById(R.id.imageHistory);
 		imageButtonMode = (ImageButton) findViewById(R.id.imageMapMode);
 		mapView = (MapView) findViewById(R.id.mapView);
-		threadProgressBar = new ProgressThread();
+//		threadProgressBar = new ProgressThread();
 		threadOutTime = new OutTimeThread();
 		geoPoint = new GeoPoint((int) (initLatitude * 1e6),
 				(int) (initLongitude * 1e6));

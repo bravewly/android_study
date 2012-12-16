@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
 import android.location.Address;
@@ -14,8 +15,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class ProgressThread extends Thread {
-	MainActivity mainActivity = new MainActivity();
+//	MainActivity mainActivity = new MainActivity();
+	private MapView mMapView;
 
+	ProgressThread(MapView mapView) {
+		mMapView = mapView;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -49,7 +54,7 @@ public class ProgressThread extends Thread {
 				Log.d(MainActivity.TAG, "longitudeD --> " + longitudeD);
 				MainActivity.geoPoint = new GeoPoint((int) (latitudeD * 1e6),
 						(int) (longitudeD * 1e6));
-				List<Overlay> overlays = MainActivity.mapView.getOverlays();
+				List<Overlay> overlays = mMapView.getOverlays();
 				BalloonOverlay currentBalloonOverlay = null;
 				for (Overlay overlay : overlays) {
 					if (overlay instanceof BalloonOverlay) {
@@ -80,17 +85,19 @@ public class ProgressThread extends Thread {
 					overlays.add(balloonOverlay2);
 				}
 
-				Log.d(MainActivity.TAG, "mainAcitvity --> " + mainActivity);
-				Log.d(MainActivity.TAG, "mainActivity.mapController --> "
-						+ mainActivity.mapController);
+//				Log.d(MainActivity.TAG, "mainAcitvity --> " + mainActivity);
+				 Log.d(MainActivity.TAG, "MMMMMMMMmmainActivity.getMapController() --> "
+				 + MainActivity.mapController);
 				Log.d(MainActivity.TAG, "MainActivity.geoPoint --> "
 						+ MainActivity.geoPoint);
-				if (mainActivity.mapController != null) {
-					mainActivity.mapController.animateTo(MainActivity.geoPoint);
+				// if (mainActivity.mapController != null) {
+				// mainActivity.mapController.animateTo(MainActivity.geoPoint);
+				// Log.d(MainActivity.TAG, " is not null.");
+				// }
+				if (mMapView.getController() != null) {
+					mMapView.getController().animateTo(MainActivity.geoPoint);
 					Log.d(MainActivity.TAG, " is not null.");
-				}
-
-				else
+				} else
 					return;
 			} else {
 				// Toast..
@@ -100,7 +107,10 @@ public class ProgressThread extends Thread {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Toast.makeText(MainActivity.context, "对不起，IO有误，请重启应用！",
+					Toast.LENGTH_SHORT).show();
+			Log.d(MainActivity.TAG, "io exception", e);
+			return;
 		}
 		Looper.loop();
 	}
