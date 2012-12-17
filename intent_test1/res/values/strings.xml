@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">Intent练习</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_start_activity">启动ActivityOne</string>
+    <string name="button_start2_service">启动ServiceTwo</string>
+    <string name="button_start2_activity">启动ActivityTwo</string>
+    <string name="button_start_service">启动ServiceOne</string>
+    <string name="button_modify">修改</string>
+    <string name="button_back">返回</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="text_cont">这是ActivityOne</string>
+
+</resources>
