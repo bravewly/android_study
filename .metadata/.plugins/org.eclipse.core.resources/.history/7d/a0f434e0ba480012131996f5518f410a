@@ -1,0 +1,20 @@
+package com.wang.basetest;
+
+public class MathFloorTest {
+
+	public static void main(String args[]) {
+		double Da = 3.61;
+		int Ia = (int) Math.floor(Da);
+		double Da = -3.61;
+		int Ib = (int) Math.floor(Db);
+		double Da = 3.41;
+		int Ic = (int) Math.floor(Dc);
+		double Da = 3.41;
+		int Id = (int) Math.floor(Dd);
+		p(Da + " --> " + Ia);
+	}
+
+	private static void p(String s) {
+		System.out.println(s);
+	}
+}

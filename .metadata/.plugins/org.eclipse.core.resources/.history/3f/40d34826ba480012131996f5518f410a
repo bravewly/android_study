@@ -1,0 +1,8 @@
+package com.wang.basetest;
+
+public class MathFloorTest {
+
+	public static void main (String args[]) {
+		
+	}
+}

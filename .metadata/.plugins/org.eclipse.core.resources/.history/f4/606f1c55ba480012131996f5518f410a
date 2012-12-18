@@ -1,0 +1,13 @@
+package com.wang.basetest;
+
+public class MathFloorTest {
+
+	public static void main(String args[]) {
+		double Da = 3.61;
+
+	}
+
+	private static void p(String s) {
+		System.out.println(s);
+	}
+}

@@ -1,0 +1,23 @@
+package com.wang.basetest;
+
+public class MathFloorTest {
+
+	public static void main(String args[]) {
+		double Da = 3.61;
+		int Ia = (int) Math.floor(Da);
+		double Db = -3.61;
+		int Ib = (int) Math.floor(Db);
+		double Dc = 3.5;
+		int Ic = (int) Math.floor(Dc);
+		double Dd = 0.5;
+		int Id = (int) Math.floor(Dd);
+		p(Da + " --> " + Ia);
+		p(Db + " --> " + Ib);
+		p(Dc + " --> " + Ic);
+		p(Dd + " --> " + Id);
+	}
+
+	private static void p(String s) {
+		System.out.println(s);
+	}
+}
