@@ -16,7 +16,6 @@
 
 package com.example.android.snake;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -24,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -31,10 +31,8 @@ import android.view.View;
  * drawables.
  * 
  */
-class A extends Activity {
-	
-}
 public class TileView extends View {
+	private static final String TAG = "WangTileView";
 
 	/**
 	 * Parameters controlling the size of the tiles and their range within view.
@@ -51,14 +49,16 @@ public class TileView extends View {
 	private static int mYOffset;
 
 	/**
-	 * A hash that maps integer handles specified by the subclasser to the
-	 * drawable that will be used for that reference
+	 * A hash that maps integer handles specified by the sub classer to the
+	 * draw able that will be used for that reference.
+	 * 存放游戏中需要显示内容的 tiles。包括，墙壁、蛇身和随机出现的苹果.
 	 */
 	private Bitmap[] mTileArray;
 
 	/**
 	 * A two-dimensional array of integers in which the number represents the
-	 * index of the tile that should be drawn at that locations
+	 * index of the tile that should be drawn at that locations.
+	 * 存放游戏中需要显示内容的 tiles 的坐标。包括，墙壁、蛇身和随机出现的苹果.
 	 */
 	private int[][] mTileGrid;
 
@@ -82,7 +82,6 @@ public class TileView extends View {
 				R.styleable.TileView);
 
 		mTileSize = a.getInt(R.styleable.TileView_tileSize, 12);
-
 		a.recycle();
 	}
 
@@ -97,15 +96,33 @@ public class TileView extends View {
 		mTileArray = new Bitmap[tilecount];
 	}
 
+	/**
+	 * 计算并获取游戏界面的基本数据.
+	 * @param w
+	 *            当前视图的宽度，在这里也就是屏幕的宽度.
+	 * @param h
+	 *            同上.
+	 */
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		Log.d(TAG, "w --> " + w);
+		Log.d(TAG, "mTileSize --> " + mTileSize);
+
 		mXTileCount = (int) Math.floor(w / mTileSize);
 		mYTileCount = (int) Math.floor(h / mTileSize);
+
+		Log.d(TAG, "mXTileCount --> " + mXTileCount);
+		Log.d(TAG, "mYTileCount --> " + mYTileCount);
 
 		mXOffset = ((w - (mTileSize * mXTileCount)) / 2);
 		mYOffset = ((h - (mTileSize * mYTileCount)) / 2);
 
+		Log.d(TAG, "mXOffset --> " + mXOffset);
+		Log.d(TAG, "mYOffset --> " + mYOffset);
+
 		mTileGrid = new int[mXTileCount][mYTileCount];
+
+		// 将mTileGrid 的所有元素值设置为0.
 		clearTiles();
 	}
 
@@ -124,6 +141,7 @@ public class TileView extends View {
 		tile.draw(canvas);
 
 		mTileArray[key] = bitmap;
+
 	}
 
 	/**
@@ -154,8 +172,13 @@ public class TileView extends View {
 	@Override
 	public void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+
+		// 对整个游戏屏幕的 tiles 进行遍历.
 		for (int x = 0; x < mXTileCount; x += 1) {
 			for (int y = 0; y < mYTileCount; y += 1) {
+
+				// Draw the game screen, include snake's body, random apples and
+				// the wall..
 				if (mTileGrid[x][y] > 0) {
 					canvas.drawBitmap(mTileArray[mTileGrid[x][y]], mXOffset + x
 							* mTileSize, mYOffset + y * mTileSize, mPaint);
