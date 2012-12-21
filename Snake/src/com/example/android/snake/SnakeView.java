@@ -109,8 +109,9 @@ public class SnakeView extends TileView {
 
 		@Override
 		public void handleMessage(Message msg) {
-			SnakeView.this.update();	
-			SnakeView.this.invalidate();
+			SnakeView.this.update(); // Why not use update method directly?
+			// updateWalls();
+			SnakeView.this.invalidate();// Idem.
 		}
 
 		public void sleep(long delayMillis) {
@@ -258,7 +259,8 @@ public class SnakeView extends TileView {
 	public boolean onKeyDown(int keyCode, KeyEvent msg) {
 
 		if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-			if (mMode == READY | mMode == LOSE) {
+			if (mMode == READY | mMode == LOSE) { // Why not use '||' instead of
+													// '|'?
 				/*
 				 * At the beginning of the game, or the end of a previous one,
 				 * we should start a new game.
@@ -329,7 +331,11 @@ public class SnakeView extends TileView {
 		int oldMode = mMode;
 		mMode = newMode;
 
-		if (newMode == RUNNING & oldMode != RUNNING) {
+		// if (newMode == RUNNING & oldMode == READY) {
+		// updateWalls();
+		// }
+
+		if (newMode == RUNNING & oldMode != RUNNING) { // Why not use '&&'?
 			mStatusText.setVisibility(View.INVISIBLE);
 			update();
 			return;
@@ -382,7 +388,7 @@ public class SnakeView extends TileView {
 			found = !collision;
 		}
 		if (newCoord == null) {
-			Log.e(TAG, "Somehow ended up with a null newCoord!");
+			Log.e(TAG, "Somehow ended up with a null newCoord!");	//	这句话执行不到吧？
 		}
 		mAppleList.add(newCoord);
 	}
@@ -398,6 +404,7 @@ public class SnakeView extends TileView {
 
 			if (now - mLastMove > mMoveDelay) {
 				clearTiles();
+				// updateWalls();
 				updateWalls();
 				updateSnake();
 				updateApples();
@@ -405,7 +412,6 @@ public class SnakeView extends TileView {
 			}
 			mRedrawHandler.sleep(mMoveDelay);
 		}
-
 	}
 
 	/**
@@ -518,7 +524,6 @@ public class SnakeView extends TileView {
 			}
 			index++;
 		}
-
 	}
 
 	/**
