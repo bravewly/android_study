@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class Sudoku extends Activity implements OnClickListener {
    private static final String TAG = "Sudoku";
@@ -28,7 +29,7 @@ public class Sudoku extends Activity implements OnClickListener {
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
-
+      
       // Set up click listeners for all the buttons
       View continueButton = findViewById(R.id.continue_button);
       continueButton.setOnClickListener(this);
@@ -36,7 +37,8 @@ public class Sudoku extends Activity implements OnClickListener {
       newButton.setOnClickListener(this);
       View aboutButton = findViewById(R.id.about_button);
       aboutButton.setOnClickListener(this);
-      View exitButton = findViewById(R.id.exit_button);
+//      View exitButton = findViewById(R.id.exit_button);
+      Button exitButton = (Button) findViewById(R.id.exit_button);
       exitButton.setOnClickListener(this);
    }
 
