@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -312,6 +313,51 @@ public class SnakeView extends TileView {
 	}
 
 	/**
+	 * Implement handle the game by touch screen.
+	 */
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		int touchX = 0, touchY = 0;
+		int headX = 0, headY = 0;
+		Coordinate head = null;
+		if (mSnakeTrail != null && mSnakeTrail.size() != 0) {
+			head = mSnakeTrail.get(0);
+		}
+
+		if (head == null) {
+			return false;
+		}
+		headX = head.x * mTileSize + mXOffset;
+		headY = head.y * mTileSize + mYOffset;
+		touchX = (int) event.getX();
+		touchY = (int) event.getY();
+
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			Log.d(TAG, "touchX --> " + touchX);
+			Log.d(TAG, "touchY --> " + touchY);
+			if (mDirection == NORTH || mDirection == SOUTH) {
+				if (touchX < headX) {
+					mNextDirection = WEST;
+				} else {
+					mNextDirection = EAST;
+				}
+			}
+			
+			if (mDirection == WEST || mDirection == EAST) {
+				if (touchY < headY) {
+					mNextDirection = NORTH;
+				} else {
+					mNextDirection = SOUTH;
+				}
+			}
+			
+		}
+
+		return super.onTouchEvent(event);
+	}
+
+	/**
 	 * Sets the TextView that will be used to give information (such as "Game
 	 * Over" to the user.
 	 * 
@@ -388,7 +434,7 @@ public class SnakeView extends TileView {
 			found = !collision;
 		}
 		if (newCoord == null) {
-			Log.e(TAG, "Somehow ended up with a null newCoord!");	//	这句话执行不到吧？
+			Log.e(TAG, "Somehow ended up with a null newCoord!"); // 这句话执行不到吧？
 		}
 		mAppleList.add(newCoord);
 	}
