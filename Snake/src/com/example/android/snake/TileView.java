@@ -49,16 +49,16 @@ public class TileView extends View {
 	protected static int mYOffset;
 
 	/**
-	 * A hash that maps integer handles specified by the sub classer to the
-	 * draw able that will be used for that reference.
-	 * 存放游戏中需要显示内容的 tiles。包括，墙壁、蛇身和随机出现的苹果.
+	 * A hash that maps integer handles specified by the sub classer to the draw
+	 * able that will be used for that reference. 存放游戏中需要显示内容的
+	 * tiles。包括，墙壁、蛇身和随机出现的苹果.
 	 */
 	private Bitmap[] mTileArray;
 
 	/**
 	 * A two-dimensional array of integers in which the number represents the
-	 * index of the tile that should be drawn at that locations.
-	 * 存放游戏中需要显示内容的 tiles 的坐标。包括，墙壁、蛇身和随机出现的苹果.
+	 * index of the tile that should be drawn at that locations. 存放游戏中需要显示内容的
+	 * tiles 的坐标。包括，墙壁、蛇身和随机出现的苹果.
 	 */
 	private int[][] mTileGrid;
 
@@ -98,6 +98,7 @@ public class TileView extends View {
 
 	/**
 	 * 计算并获取游戏界面的基本数据.
+	 * 
 	 * @param w
 	 *            当前视图的宽度，在这里也就是屏幕的宽度.
 	 * @param h
@@ -105,7 +106,11 @@ public class TileView extends View {
 	 */
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		Log.d(TAG, "onSizeChanged()");
 		Log.d(TAG, "w --> " + w);
+		Log.d(TAG, "h --> " + h);
+		Log.d(TAG, "oldw --> " + oldw);
+		Log.d(TAG, "oldh --> " + oldh);
 		Log.d(TAG, "mTileSize --> " + mTileSize);
 
 		mXTileCount = (int) Math.floor(w / mTileSize);
@@ -172,7 +177,7 @@ public class TileView extends View {
 	@Override
 	public void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-
+		Log.d(TAG, "onDraw()");
 		// 对整个游戏屏幕的 tiles 进行遍历.
 		for (int x = 0; x < mXTileCount; x += 1) {
 			for (int y = 0; y < mYTileCount; y += 1) {

@@ -51,7 +51,8 @@ public class Snake extends Activity {
 
 		if (savedInstanceState == null) {
 			// We were just launched -- set up a new game
-			mSnakeView.setMode(SnakeView.READY);
+//			mSnakeView.setMode(SnakeView.READY);
+			mSnakeView.setMode(SnakeView.RUNNING);
 		} else {
 			// We are being restored
 			Bundle map = savedInstanceState.getBundle(ICICLE_KEY);

@@ -260,8 +260,8 @@ public class SnakeView extends TileView {
 	public boolean onKeyDown(int keyCode, KeyEvent msg) {
 
 		if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-			if (mMode == READY | mMode == LOSE) { // Why not use '||' instead of
-													// '|'?
+			if (mMode == READY || mMode == LOSE) {
+
 				/*
 				 * At the beginning of the game, or the end of a previous one,
 				 * we should start a new game.
@@ -336,6 +336,7 @@ public class SnakeView extends TileView {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			Log.d(TAG, "touchX --> " + touchX);
 			Log.d(TAG, "touchY --> " + touchY);
+
 			if (mDirection == NORTH || mDirection == SOUTH) {
 				if (touchX < headX) {
 					mNextDirection = WEST;
@@ -343,7 +344,7 @@ public class SnakeView extends TileView {
 					mNextDirection = EAST;
 				}
 			}
-			
+
 			if (mDirection == WEST || mDirection == EAST) {
 				if (touchY < headY) {
 					mNextDirection = NORTH;
@@ -351,7 +352,7 @@ public class SnakeView extends TileView {
 					mNextDirection = SOUTH;
 				}
 			}
-			
+
 		}
 
 		return super.onTouchEvent(event);
@@ -377,9 +378,14 @@ public class SnakeView extends TileView {
 		int oldMode = mMode;
 		mMode = newMode;
 
-		// if (newMode == RUNNING & oldMode == READY) {
-		// updateWalls();
-		// }
+		if (newMode == RUNNING && oldMode == READY) {
+			Log.d(TAG, "Starting");
+			mStatusText.setVisibility(View.INVISIBLE);
+			initNewGame();
+			// setMode(RUNNING);
+			update();
+			return;
+		}
 
 		if (newMode == RUNNING & oldMode != RUNNING) { // Why not use '&&'?
 			mStatusText.setVisibility(View.INVISIBLE);
@@ -402,6 +408,7 @@ public class SnakeView extends TileView {
 
 		mStatusText.setText(str);
 		mStatusText.setVisibility(View.VISIBLE);
+
 	}
 
 	/**
@@ -416,6 +423,11 @@ public class SnakeView extends TileView {
 		boolean found = false;
 		while (!found) {
 			// Choose a new location for our apple
+
+			Log.d(TAG, "mXTileCount --> " + mXTileCount);
+			Log.d(TAG,
+					"RNG.nextInt(mXTileCount - 2) --> "
+							+ RNG.nextInt(mXTileCount - 2));
 			int newX = 1 + RNG.nextInt(mXTileCount - 2);
 			int newY = 1 + RNG.nextInt(mYTileCount - 2);
 			newCoord = new Coordinate(newX, newY);
